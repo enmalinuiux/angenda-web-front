@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "agenda-web-front"
+  "defaultProject": "agenda-web-front",
+  "cli": {
+    "analytics": false
+  }
 }
