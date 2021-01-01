@@ -12,19 +12,30 @@ import Swal from 'sweetalert2';
 export class AppComponent implements OnInit {
   title = 'agenda-web-front';
 
-  users: User[];
+  user: User;
 
   constructor(private userSv: UserService){
-    
+    this.user = {
+      id: "26b28326-cca7-449b-b0b6-003f1c043ef9",
+      name: 'Yo2',
+      lastName: "Medrano Mendez",
+      pass: "Aguacate",
+      email: "alexmm011@gmail.com",
+      business: null,
+      birth: new Date("2021-01-01"),
+      userType: 0,
+      addressStreet: "Calle Duverge #84",
+      addressCity: "San Jose de Ocoa",
+      addressCountry: "Republica Dominicana"
+    }
   }
 
   ngOnInit(){
-    this.userSv.GetAll().subscribe((data) => {
-      this.users = data;
+    this.userSv.Delete("26b28326-cca7-449b-b0b6-003f1c043ef9").subscribe((data) => {
       Swal.fire({
         icon: "success",
         title: "Success!",
-        text: this.users[0].id
+        text: this.user.id
       })
       console.log(data)
     }, (err) => {

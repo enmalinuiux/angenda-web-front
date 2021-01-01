@@ -20,7 +20,8 @@ export class UserService {
   }
 
   GetById(id): Observable<User>{
-    return this.httpClient.get<User>(`${this.url}/${this.END_POINT}/${id}`)
+    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZWFiNzEyLWEwZDItNGM3Mi05YzVhLWMzZDM3NTFlODhkOSIsIm5iZiI6MTYwOTQ3NTk2OSwiZXhwIjoxNjEwMDgwNzY4LCJpYXQiOjE2MDk0NzU5Njl9.CRsWC7ccsMP3QtaM-PfUm_EYRPDdCuebXctstiEgb-Q");
+    return this.httpClient.get<User>(`${this.url}/${this.END_POINT}/${id}`, { headers: Headers})
   }
 
   Post(user: User): Observable<User>{
@@ -29,11 +30,12 @@ export class UserService {
   }
 
   Put(user: User): Observable<User>{
-    const Headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZWFiNzEyLWEwZDItNGM3Mi05YzVhLWMzZDM3NTFlODhkOSIsIm5iZiI6MTYwOTQ3NTk2OSwiZXhwIjoxNjEwMDgwNzY4LCJpYXQiOjE2MDk0NzU5Njl9.CRsWC7ccsMP3QtaM-PfUm_EYRPDdCuebXctstiEgb-Q");
     return this.httpClient.put<User>(`${this.url}/${this.END_POINT}/${user.id}`, user, { headers: Headers})
   }
 
   Delete(id): Observable<User>{
-    return this.httpClient.delete<User>(`${this.url}/${this.END_POINT}/${id}`)
+    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZWFiNzEyLWEwZDItNGM3Mi05YzVhLWMzZDM3NTFlODhkOSIsIm5iZiI6MTYwOTQ3NTk2OSwiZXhwIjoxNjEwMDgwNzY4LCJpYXQiOjE2MDk0NzU5Njl9.CRsWC7ccsMP3QtaM-PfUm_EYRPDdCuebXctstiEgb-Q");
+    return this.httpClient.delete<User>(`${this.url}/${this.END_POINT}/${id}`, { headers: Headers})
   }
 }
