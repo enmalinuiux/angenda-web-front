@@ -1,5 +1,20 @@
-<div class="container">
-  <div class="cart mx-auto mt-4">
+<div class="container p-4">
+  <h1>{{title}}</h1>
+  <hr>
+  <div class="row">
+    <div class="col-4">
+      <div class="card mx-auto p-4">
+        <app-login-form></app-login-form>
+      </div>
+    </div>
+    <div class="col-8">
+      <div class="card mx-auto p-4">
+        <app-register-form (userRegistered)="addItem($event)"></app-register-form>
+      </div>
+    </div>
+  </div>
+  
+  <div class="mx-auto mt-4">
     <table class="table table-bordered">
       <thead class="text-white">
         <tr class="bg-dark">
@@ -19,7 +34,7 @@
           <td>{{user.lastName}}</td>
           <td>{{user.email}}</td>
           <td>{{user.business}}</td>
-          <td>{{user.birth}}</td>
+          <td>{{user.birth | date}}</td>
           <td><button class="btn btn-danger" (click)="Delete(user.id)">D</button></td>
         </tr>
       </tbody>
