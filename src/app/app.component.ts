@@ -36,6 +36,14 @@ export class AppComponent implements OnInit {
   GetUsers(){
     this.userSv.GetAll().subscribe((data) => {
       this.users = data;
+      this.users.forEach(user => {
+        if(user.userType == 0 && user.business != ""){
+          this.userSv.GetById(user.business).subscribe((bUser) => {
+            user.business = bUser.name;
+          });
+        }
+      });
+            
     }, (err) => {
       console.log(err);
     })
