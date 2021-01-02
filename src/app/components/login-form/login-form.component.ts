@@ -32,9 +32,11 @@ export class LoginFormComponent implements OnInit {
   SingIn(){
     this.authService.Authenticate(this.auth).subscribe((data) => {
       this.authtResponse = data;
+      let token = this.authtResponse.token;
 
-      if (this.authtResponse.token){
-        localStorage.setItem("token", this.authtResponse.token);
+      if (token){
+        console.log(token)
+        localStorage.setItem("token", token);
       }
     }, (err) => {
       console.log(err);

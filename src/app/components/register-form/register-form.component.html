@@ -1,33 +1,58 @@
 <form class="row">
-    <div class="col-md-6 mb-3">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [(ngModel)]="isBusiness" [ngModelOptions]="{standalone: true}">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Is A Business?</label>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3" [ngClass]="{'col-md-6': !isBusiness, 'col-md-12': isBusiness}">
         <label for="UserName" class="form-label">First name</label>
         <input type="text" class="form-control" id="UserName" [(ngModel)]="user.name" name="UserName" required [ngModelOptions]="{standalone: true}">
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-6 mb-3" *ngIf="!isBusiness">
         <label for="UserLastName" class="form-label">Last name</label>
         <input type="text" class="form-control" id="UserLastName" [(ngModel)]="user.lastName" name="UserLastName" required [ngModelOptions]="{standalone: true}">
     </div>
-    <div class="col-md-6 mb-3">
+    <div class="col-md-12 mb-3">
         <label for="UserEmail" class="form-label">Email</label>
         <input type="email" class="form-control" id="UserEmail" [(ngModel)]="user.email" name="UserEmail" required [ngModelOptions]="{standalone: true}">
     </div>
     <div class="col-md-6 mb-3">
         <label for="UserPass" class="form-label">Password</label>
-        <input type="text" class="form-control" id="UserPass" [(ngModel)]="user.pass" name="UserPass" required [ngModelOptions]="{standalone: true}"> 
+        <input type="text" class="form-control" id="UserPass" [(ngModel)]="user.pass" name="UserPass" required [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="ConfirmPass" class="form-label">Confirm Password</label>
+      <input type="text" class="form-control" id="ConfirmPass" [(ngModel)]="passToConfirm" name="ConfirmPass" required [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="mb-3" [ngClass]="{'col-md-6': !isBusiness, 'col-md-12': isBusiness}">
+      <label for="UserBirth" class="form-label">Birthday</label>
+      <input type="text" class="form-control" id="UserBirth" [(ngModel)]="date" name="UserBirth" required [ngModelOptions]="{standalone: true}">
+    </div>
+    <div class="col-md-6 mb-3" *ngIf="!isBusiness">
+      <label for="UserBusiness" class="form-label">Business name where you Work</label>
+      <select class="form-select" id="UserBusiness" [(ngModel)]="user.business" name="UserBusiness" required [ngModelOptions]="{standalone: true}">
+        <option selected disabled value="">Choose One...</option>
+        <option *ngFor="let bUser of bUsers">
+          {{bUser.name}}
+        </option>
+      </select>
     </div>
     <div class="col-md-12 mb-3">
       <label for="validationCustom03" class="form-label">Address Street</label>
       <input type="text" class="form-control" id="validationCustom03" [(ngModel)]="user.addressStreet" required [ngModelOptions]="{standalone: true}">
     </div>
     <div class="col-md-6 mb-3">
-        <label for="UserAddressCountry" class="form-label">Address Country</label>
-        <select class="form-select" id="UserAddressCountry" [(ngModel)]="user.addressCountry" name="UserAddressCountry" required [ngModelOptions]="{standalone: true}">
-          <option selected disabled value="">Choose One...</option>
-          <option>Pais 1</option>
-          <option>Pais 2</option>
-          <option>Pais 3</option>
-        </select>
-      </div>
+      <label for="UserAddressCountry" class="form-label">Address Country</label>
+      <select class="form-select" id="UserAddressCountry" [(ngModel)]="user.addressCountry" name="UserAddressCountry" required [ngModelOptions]="{standalone: true}">
+        <option selected disabled value="">Choose One...</option>
+        <option>Pais 1</option>
+        <option>Pais 2</option>
+        <option>Pais 3</option>
+      </select>
+    </div>
     <div class="col-md-6 mb-3">
       <label for="UserAddressCity" class="form-label">Address City</label>
       <select class="form-select" id="UserAddressCity" [(ngModel)]="user.addressCity" name="UserAddressCity" required [ngModelOptions]="{standalone: true}">
