@@ -15,7 +15,7 @@ export class UserService {
   url = environment.API_URL;
 
   GetAll(): Observable<User[]>{
-    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZWFiNzEyLWEwZDItNGM3Mi05YzVhLWMzZDM3NTFlODhkOSIsIm5iZiI6MTYwOTQ3NTk2OSwiZXhwIjoxNjEwMDgwNzY4LCJpYXQiOjE2MDk0NzU5Njl9.CRsWC7ccsMP3QtaM-PfUm_EYRPDdCuebXctstiEgb-Q");
+    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + localStorage.getItem("token"));
     return this.httpClient.get<User[]>(`${this.url}/${this.END_POINT}`, { headers: Headers})
   }
 
