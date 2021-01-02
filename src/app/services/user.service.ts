@@ -9,33 +9,38 @@ import { Observable } from 'rxjs';
 })
 export class UserService {
 
-  constructor(private httpClient: HttpClient) { }
+  endpoint: string;
+  url: string;
+  token: string;
 
-  END_POINT: string = "user";
-  url = environment.API_URL;
+  constructor(private httpClient: HttpClient) {
+    this.endpoint = "user";
+    this.url = environment.API_URL;
+    this.token = localStorage.getItem("token");
+  }  
 
   GetAll(): Observable<User[]>{
-    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + localStorage.getItem("token"));
-    return this.httpClient.get<User[]>(`${this.url}/${this.END_POINT}`, { headers: Headers})
+    const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
+    return this.httpClient.get<User[]>(`${this.url}/${this.endpoint}`, { headers: HEADERS})
   }
 
-  GetById(id): Observable<User>{
-    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZWFiNzEyLWEwZDItNGM3Mi05YzVhLWMzZDM3NTFlODhkOSIsIm5iZiI6MTYwOTQ3NTk2OSwiZXhwIjoxNjEwMDgwNzY4LCJpYXQiOjE2MDk0NzU5Njl9.CRsWC7ccsMP3QtaM-PfUm_EYRPDdCuebXctstiEgb-Q");
-    return this.httpClient.get<User>(`${this.url}/${this.END_POINT}/${id}`, { headers: Headers})
+  GetById(id: string): Observable<User>{
+    const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
+    return this.httpClient.get<User>(`${this.url}/${this.endpoint}/${id}`, { headers: HEADERS})
   }
 
   Post(user: User): Observable<User>{
-    const Headers = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.post<User>(`${this.url}/${this.END_POINT}`, user, { headers: Headers})
+    const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.httpClient.post<User>(`${this.url}/${this.endpoint}`, user, { headers: HEADERS})
   }
 
   Put(user: User): Observable<User>{
-    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZWFiNzEyLWEwZDItNGM3Mi05YzVhLWMzZDM3NTFlODhkOSIsIm5iZiI6MTYwOTQ3NTk2OSwiZXhwIjoxNjEwMDgwNzY4LCJpYXQiOjE2MDk0NzU5Njl9.CRsWC7ccsMP3QtaM-PfUm_EYRPDdCuebXctstiEgb-Q");
-    return this.httpClient.put<User>(`${this.url}/${this.END_POINT}/${user.id}`, user, { headers: Headers})
+    const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
+    return this.httpClient.put<User>(`${this.url}/${this.endpoint}/${user.id}`, user, { headers: HEADERS})
   }
 
-  Delete(id): Observable<User>{
-    const Headers = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", "Bearer " + "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlZWFiNzEyLWEwZDItNGM3Mi05YzVhLWMzZDM3NTFlODhkOSIsIm5iZiI6MTYwOTQ3NTk2OSwiZXhwIjoxNjEwMDgwNzY4LCJpYXQiOjE2MDk0NzU5Njl9.CRsWC7ccsMP3QtaM-PfUm_EYRPDdCuebXctstiEgb-Q");
-    return this.httpClient.delete<User>(`${this.url}/${this.END_POINT}/${id}`, { headers: Headers})
+  Delete(id: string): Observable<User>{
+    const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
+    return this.httpClient.delete<User>(`${this.url}/${this.endpoint}/${id}`, { headers: HEADERS})
   }
 }
