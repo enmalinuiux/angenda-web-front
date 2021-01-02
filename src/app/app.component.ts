@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from './interfaces/user';
 import { UserService } from './services/user.service';
 import Swal from 'sweetalert2';
@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
 
   users: User[];
 
-  constructor(private userSv: UserService,  private elementRef: ElementRef){
+  constructor(private userSv: UserService){
     // this.user = {
     //   id: "26b28326-cca7-449b-b0b6-003f1c043ef9",
     //   name: 'Yo2',
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
 
   Delete(id){
     Swal.fire({
-      icon: "success",
+      icon: "warning",
       title: "Estas seguro?!",
       text: "Se elimira para siempre!",
       showCancelButton: true,
