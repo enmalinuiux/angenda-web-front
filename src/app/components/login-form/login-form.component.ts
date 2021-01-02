@@ -29,15 +29,15 @@ export class LoginFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login(){
-    this.authService.Authenticate(this.auth).subscribe(data => {
+  SingIn(){
+    this.authService.Authenticate(this.auth).subscribe((data) => {
       this.authtResponse = data;
-
-      console.log(this.authtResponse);
 
       if (this.authtResponse.token){
         localStorage.setItem("token", this.authtResponse.token);
       }
+    }, (err) => {
+      console.log(err);
     });
   }
 }

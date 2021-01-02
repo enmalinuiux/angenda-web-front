@@ -13,20 +13,7 @@ export class AppComponent implements OnInit {
 
   users: User[];
 
-  constructor(private userSv: UserService,  private elementRef: ElementRef){
-    // this.user = {
-    //   id: "26b28326-cca7-449b-b0b6-003f1c043ef9",
-    //   name: 'Yo2',
-    //   lastName: "Medrano Mendez",
-    //   pass: "Aguacate",
-    //   email: "alexmm011@gmail.com",
-    //   business: null,
-    //   birth: new Date("2021-01-01"),
-    //   userType: 0,
-    //   addressStreet: "Calle Duverge #84",
-    //   addressCity: "San Jose de Ocoa",
-    //   addressCountry: "Republica Dominicana"
-    // }
+  constructor(private userSv: UserService){
   }
 
   ngOnInit(){
@@ -46,14 +33,18 @@ export class AppComponent implements OnInit {
             
     }, (err) => {
       console.log(err);
-    })
+    });
+  }
+
+  addItem(newUser: User){
+    this.users.push(newUser);
   }
 
   AddUser(){ }
 
   EditUser(){ }
 
-  Delete(id){
+  Delete(id: string){
     Swal.fire({
       icon: "success",
       title: "Estas seguro?!",

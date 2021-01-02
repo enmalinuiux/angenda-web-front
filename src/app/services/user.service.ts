@@ -21,26 +21,21 @@ export class UserService {
 
   GetAll(): Observable<User[]>{
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
-    return this.httpClient.get<User[]>(`${this.url}/${this.endpoint}`, { headers: HEADERS})
+    return this.httpClient.get<User[]>(`${this.url}/${this.endpoint}`, { headers: HEADERS });
   }
 
   GetById(id: string): Observable<User>{
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
-    return this.httpClient.get<User>(`${this.url}/${this.endpoint}/${id}`, { headers: HEADERS})
-  }
-
-  Post(user: User): Observable<User>{
-    const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.post<User>(`${this.url}/${this.endpoint}`, user, { headers: HEADERS})
+    return this.httpClient.get<User>(`${this.url}/${this.endpoint}/${id}`, { headers: HEADERS });
   }
 
   Put(user: User): Observable<User>{
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
-    return this.httpClient.put<User>(`${this.url}/${this.endpoint}/${user.id}`, user, { headers: HEADERS})
+    return this.httpClient.put<User>(`${this.url}/${this.endpoint}/${user.id}`, user, { headers: HEADERS });
   }
 
   Delete(id: string): Observable<User>{
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
-    return this.httpClient.delete<User>(`${this.url}/${this.endpoint}/${id}`, { headers: HEADERS})
+    return this.httpClient.delete<User>(`${this.url}/${this.endpoint}/${id}`, { headers: HEADERS });
   }
 }
