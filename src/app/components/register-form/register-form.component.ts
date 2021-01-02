@@ -1,6 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-register-form',
@@ -11,12 +12,18 @@ export class RegisterFormComponent implements OnInit {
 
   @Output() userRegistered = new EventEmitter<User>();
 
+  bUsers: User[];
   user: User;
   date: string;
+  passToConfirm: string;
+  isBusiness: boolean;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, private userSv: UserService) {
 
     this.date = ""
+    this.passToConfirm = ""
+    this.isBusiness = false;
+    this.bUsers = [];
     
     this.user = {
       name: "",
@@ -24,7 +31,7 @@ export class RegisterFormComponent implements OnInit {
       pass: "",
       email: "",
       business: "",
-      birth: new Date(this.date),
+      birth: new Date("0000-00-00"),
       userType: 0,
       addressStreet: "",
       addressCity: "",
@@ -33,13 +40,40 @@ export class RegisterFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getUsersBusiness();
+  }
+
+  getUsersBusiness(){
+    this.userSv.GetAll().subscribe((data)=>{
+      data.forEach(user => {
+        if(user.userType == 1) this.bUsers.push(user);
+      });
+    })
+  }
+
+  getBUserId(name: string):string {
+    let bU = this.bUsers.find(u => u.name == name);
+    return bU.id;
   }
 
   SingUp(){
-    this.authService.RegisterNewUser(this.user).subscribe((data) => {
-      this.userRegistered.emit(data);
-    }, (err) => {
-      console.log(err);
-    });
+    if(this.passToConfirm == this.user.pass){
+      if(this.isBusiness)
+        this.user.userType = 1;
+
+      this.user.birth = new Date(this.date);
+
+      console.log(this.user.business);
+
+      this.user.business = this.getBUserId(this.user.business);
+      
+      this.authService.RegisterNewUser(this.user).subscribe((data) => {
+        this.userRegistered.emit(data);
+      }, (err) => {
+        console.log(err);
+      });
+    }
+    else
+      console.log("Las contraseñas no coinsiden!");
   }
 }
