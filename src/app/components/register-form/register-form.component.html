@@ -1,4 +1,4 @@
-<form class="row">
+<form class="row needs-validation" novalidate>
     <div class="row">
       <div class="col-md-4">
         <div class="form-check form-switch">
@@ -10,6 +10,12 @@
     <div class="mb-3" [ngClass]="{'col-md-6': !isBusiness, 'col-md-12': isBusiness}">
         <label for="UserName" class="form-label">First name</label>
         <input type="text" class="form-control" id="UserName" [(ngModel)]="user.name" name="UserName" required [ngModelOptions]="{standalone: true}">
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+        <div class="invalid-feedback">
+          Please choose a username.
+        </div>
     </div>
     <div class="col-md-6 mb-3" *ngIf="!isBusiness">
         <label for="UserLastName" class="form-label">Last name</label>
@@ -21,15 +27,15 @@
     </div>
     <div class="col-md-6 mb-3">
         <label for="UserPass" class="form-label">Password</label>
-        <input type="text" class="form-control" id="UserPass" [(ngModel)]="user.pass" name="UserPass" required [ngModelOptions]="{standalone: true}">
+        <input type="password" class="form-control" id="UserPass" [(ngModel)]="user.pass" name="UserPass" required [ngModelOptions]="{standalone: true}">
     </div>
     <div class="col-md-6 mb-3">
       <label for="ConfirmPass" class="form-label">Confirm Password</label>
-      <input type="text" class="form-control" id="ConfirmPass" [(ngModel)]="passToConfirm" name="ConfirmPass" required [ngModelOptions]="{standalone: true}">
+      <input type="password" class="form-control" id="ConfirmPass" [(ngModel)]="passToConfirm" name="ConfirmPass" required [ngModelOptions]="{standalone: true}">
     </div>
     <div class="mb-3" [ngClass]="{'col-md-6': !isBusiness, 'col-md-12': isBusiness}">
       <label for="UserBirth" class="form-label">Birthday</label>
-      <input type="text" class="form-control" id="UserBirth" [(ngModel)]="date" name="UserBirth" required [ngModelOptions]="{standalone: true}">
+      <input type="text" class="form-control date" id="UserBirth" [(ngModel)]="date" name="UserBirth" required [ngModelOptions]="{standalone: true}">
     </div>
     <div class="col-md-6 mb-3" *ngIf="!isBusiness">
       <label for="UserBusiness" class="form-label">Business name where you Work</label>
@@ -74,3 +80,4 @@
       <button class="btn btn-primary" type="submit" (click)="SingUp()">Sing Up</button>
     </div>
   </form>
+

@@ -11,59 +11,16 @@ import Swal from 'sweetalert2';
 export class AppComponent implements OnInit {
   title = 'agenda-web-front';
 
-  users: User[];
+  // users: User[];
 
   constructor(private userSv: UserService){
   }
 
   ngOnInit(){
-    this.GetUsers();
+    //localStorage.setItem("token", undefined);
   }
 
-  GetUsers(){
-    this.userSv.GetAll().subscribe((data) => {
-      this.users = data;
-      this.users.forEach(user => {
-        if(user.userType == 0 && user.business != null){
-          this.userSv.GetById(user.business).subscribe((bUser) => {
-            user.business = bUser.name;
-          });
-        }
-      });
-    }, (err) => {
-      console.log(err);
-    });
-  }
-
-  addItem(newUser: User){
-    this.users.push(newUser);
-  }
-
-  AddUser(){ }
-
-  EditUser(){ }
-
-  Delete(id: string){
-    Swal.fire({
-      icon: "warning",
-      title: "Estas seguro?!",
-      text: "Se elimira para siempre!",
-      showCancelButton: true,
-      confirmButtonText: 'Si, borralo',
-      cancelButtonText: 'No',
-      reverseButtons: true
-    }).then((result) => {
-      if(result.isConfirmed){
-        this.userSv.Delete(id).subscribe(() => {
-          Swal.fire({
-            icon: "success",
-            title: "Borrado!",
-          });
-          this.GetUsers();
-        }, (err) => {
-          console.log(err);
-        });
-      }
-    });
-  }
+  // addItem(newUser: User){
+  //   this.users.push(newUser);
+  // }
 }

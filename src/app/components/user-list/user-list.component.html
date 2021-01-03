@@ -1,0 +1,24 @@
+<table class="table table-bordered">
+    <thead class="text-white">
+      <tr class="bg-dark">
+        <td class="text-center" colspan="6">Usuarios</td>
+      </tr>
+      <tr class="bg-secondary">
+        <td>Nombre</td>
+        <td>Apellido</td>
+        <td>Email</td>
+        <td>Empresa</td>
+        <td colspan="2">Cumpleaños</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{user.name}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.business}}</td>
+        <td>{{user.birth | date}}</td>
+        <td><button class="btn btn-danger" (click)="Delete(user.id)">D</button></td>
+      </tr>
+    </tbody>
+  </table>
