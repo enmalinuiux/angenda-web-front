@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Auth } from 'src/app/interfaces/auth';
 import { AuthResponse } from 'src/app/interfaces/auth-response';
 import { AuthService } from 'src/app/services/auth.service';
@@ -8,10 +9,11 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent implements OnInit, OnDestroy {
 
   auth: Auth;
   authtResponse: AuthResponse;
+  subscription: Subscription;
 
   constructor(private authService: AuthService) {
 
@@ -25,21 +27,28 @@ export class LoginFormComponent implements OnInit {
       token: ""
     };
    }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
   ngOnInit(): void {
   }
 
   SingIn(){
-    this.authService.Authenticate(this.auth).subscribe((data) => {
-      this.authtResponse = data;
-      let token = this.authtResponse.token;
+    if(this.auth.email != "" && this.auth.pass != ""){
+      this.subscription = this.authService.Authenticate(this.auth).subscribe((data) => {
+        this.authtResponse = data;
+        let token = this.authtResponse.token;
 
-      if (token){
-        console.log(token)
-        localStorage.setItem("token", token);
-      }
-    }, (err) => {
-      console.log(err);
-    });
+        if (token){
+          console.log(token)
+          localStorage.setItem("token", token);
+        }
+      }, (err) => {
+        console.log("Usuario o contraseña no validos!");
+      });
+    }else{
+      console.log("Todos los campos son requeridos!");
+    }
   }
 }

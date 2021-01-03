@@ -24,6 +24,11 @@ export class UserService {
     return this.httpClient.get<User[]>(`${this.url}/${this.endpoint}`, { headers: HEADERS });
   }
 
+  GetBusinessUsers(): Observable<User[]>{
+    const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
+    return this.httpClient.get<User[]>(`${this.url}/${this.endpoint}/business-users`, { headers: HEADERS });
+  }
+
   GetById(id: string): Observable<User>{
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'}).set("Authorization", `Bearer ${this.token}`);
     return this.httpClient.get<User>(`${this.url}/${this.endpoint}/${id}`, { headers: HEADERS });
