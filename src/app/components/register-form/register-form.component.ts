@@ -43,9 +43,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-
-      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+    // Fetch all the forms we want to apply custom Bootstrap validation styles to
     var forms = document.querySelectorAll('.needs-validation')
 
     // Loop over them and prevent submission
@@ -65,10 +63,8 @@ export class RegisterFormComponent implements OnInit {
   }
 
   getUsersBusiness(){
-    this.userSv.GetAll().subscribe((data)=>{
-      data.forEach(user => {
-        if(user.userType == 1) this.bUsers.push(user);
-      });
+    this.userSv.GetBusinessUsers().subscribe((data)=>{
+      this.bUsers = data;
     })
   }
 
@@ -77,21 +73,21 @@ export class RegisterFormComponent implements OnInit {
     return bU.id;
   }
 
-  async IsEmailTaked(email: string): Promise<boolean>{
-    let getUser: User;
+  // IsEmailTaked(email: string): boolean{
+  //   let getUser: User;
 
-    await this.userSv.GetAll().subscribe((data) => {
-      getUser = data.find(u => u.email == email);
-    });
+  //   this.userSv.GetAll().subscribe((data) => {
+  //     getUser = data.find(u => u.email == email);
+  //   });
 
-    console.log(getUser);
+  //   console.log(getUser);
 
-    if (getUser){
-      return true;
-    }
+  //   if (getUser){
+  //     return true;
+  //   }
 
-    return false;
-  }
+  //   return false;
+  // }
 
   SingUp(){
     if(this.passToConfirm == this.user.pass){
@@ -106,33 +102,27 @@ export class RegisterFormComponent implements OnInit {
 
       console.log(this.user.business);
       
-      if (this.IsEmailTaked(this.user.email)){
-        this.authService.RegisterNewUser(this.user).subscribe((data) => {
-          if(data != undefined){
-            let auth: Auth = {
-              email: this.user.email,
-              pass: this.user.pass
-            };
-            this.authService.Authenticate(auth).subscribe((data) => {
-              let authtResponse: AuthResponse = data;
-              let token = authtResponse.token;
-        
-              if (token){
-                console.log(token)
-                localStorage.setItem("token", token);
-              }
-            }, (err) => {
-              console.log(err);
-            });
-          }
-        }, (err) => {
-          console.log(err);
-        });
-      }
-      else 
-      {
-        console.log("Este usuario esta tomado");
-      }
+      this.authService.RegisterNewUser(this.user).subscribe((data) => {
+        if(data != undefined){
+          let auth: Auth = {
+            email: this.user.email,
+            pass: this.user.pass
+          };
+          this.authService.Authenticate(auth).subscribe((data) => {
+            let authtResponse: AuthResponse = data;
+            let token = authtResponse.token;
+      
+            if (token){
+              console.log(token)
+              localStorage.setItem("token", token);
+            }
+          }, (err) => {
+            console.log(err);
+          });
+        }
+      }, (err) => {
+        console.log("Este email ya fue registrado");
+      });
     }
     else
       console.log("Las contraseñas no coinsiden!");
