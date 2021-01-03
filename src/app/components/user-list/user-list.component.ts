@@ -35,8 +35,6 @@ export class UserListComponent implements OnInit {
     });
   }
 
-  AddUser(){ }
-
   EditUser(){ }
 
   Delete(id: string){
@@ -56,9 +54,7 @@ export class UserListComponent implements OnInit {
             icon: "success",
             title: "Borrado!",
           });
-          this.userSv.GetAll().subscribe((data) => {
-            this.users = data;
-          });
+          this.GetUsers();
         }, (err) => {
           console.log(err);
         });
