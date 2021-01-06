@@ -23,7 +23,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
     };
 
     this.authtResponse = {
-      email: "",
       token: ""
     };
    }
@@ -41,7 +40,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         let token = this.authtResponse.token;
 
         if (token){
-          console.log(token)
           localStorage.setItem("token", token);
         }
       }, (err) => {

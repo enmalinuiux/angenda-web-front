@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from './interfaces/user';
-import { UserService } from './services/user.service';
-import Swal from 'sweetalert2';
+import { ContactService } from './services/contact.service';
+import jwt_decode from 'jwt-decode';
+import { Contact } from './interfaces/contact';
 
 @Component({
   selector: 'app-root',
@@ -11,16 +12,28 @@ import Swal from 'sweetalert2';
 export class AppComponent implements OnInit {
   title = 'agenda-web-front';
 
-  // users: User[];
+  contacts: Contact[];
+  tokenInfo: any;
+  token: any;
 
-  constructor(private userSv: UserService){
+  constructor(private contactSv: ContactService){
+    this.token = localStorage.getItem("token");
+    this.tokenInfo = this.getDecodedAccessToken(this.token); // decode token
+    console.log(this.tokenInfo); // show decoded token object in console
   }
 
   ngOnInit(){
-    //localStorage.setItem("token", undefined);
+    this.contactSv.GetAllContacts(this.tokenInfo.id).subscribe(data => {
+      this.contacts = data;
+    })
   }
 
-  // addItem(newUser: User){
-  //   this.users.push(newUser);
-  // }
+  getDecodedAccessToken(token: string): any {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+        return null;
+    }
+  }
 }

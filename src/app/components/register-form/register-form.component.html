@@ -3,7 +3,7 @@
       <div class="col-md-12">
         <div class="form-check form-switch">
           <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [(ngModel)]="isBusiness" [ngModelOptions]="{standalone: true}">
-          <label class="form-check-label" for="flexSwitchCheckDefault">Is A Business?</label>
+          <label class="form-check-label" for="flexSwitchCheckDefault">Is a Business?</label>
         </div>
       </div>
     </div>
@@ -38,9 +38,9 @@
       <input type="text" class="form-control date" id="UserBirth" [(ngModel)]="date" name="UserBirth" required [ngModelOptions]="{standalone: true}">
     </div>
     <div class="col-md-6 mb-3" *ngIf="!isBusiness">
-      <label for="UserBusiness" class="form-label">Business name where you Work</label>
+      <label for="UserBusiness" class="form-label">Where you Work?</label>
       <select class="form-select" id="UserBusiness" [(ngModel)]="user.business" name="UserBusiness" required [ngModelOptions]="{standalone: true}">
-        <option selected disabled value="">Choose One...</option>
+        <option selected value="">I'm not working</option>
         <option *ngFor="let bUser of bUsers">
           {{bUser.name}}
         </option>
@@ -54,18 +54,18 @@
       <label for="UserAddressCountry" class="form-label">Address Country</label>
       <select class="form-select" id="UserAddressCountry" [(ngModel)]="user.addressCountry" name="UserAddressCountry" required [ngModelOptions]="{standalone: true}">
         <option selected disabled value="">Choose One...</option>
-        <option>Pais 1</option>
-        <option>Pais 2</option>
-        <option>Pais 3</option>
+        <option *ngFor="let country of countries;">
+          {{country.country}}
+        </option>
       </select>
     </div>
     <div class="col-md-6 mb-3">
       <label for="UserAddressCity" class="form-label">Address City</label>
       <select class="form-select" id="UserAddressCity" [(ngModel)]="user.addressCity" name="UserAddressCity" required [ngModelOptions]="{standalone: true}">
         <option selected disabled value="">Choose One...</option>
-        <option>Ciudad 1</option>
-        <option>Ciudad 2</option>
-        <option>Ciudad 3</option>
+        <option *ngFor="let city of countries[0].cities">
+          {{city.city}}
+        </option>
       </select>
     </div>
     <div class="col-12 mb-3">

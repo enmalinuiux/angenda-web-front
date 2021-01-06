@@ -2,6 +2,8 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { promise } from 'protractor';
 import { Auth } from 'src/app/interfaces/auth';
 import { AuthResponse } from 'src/app/interfaces/auth-response';
+import { City } from 'src/app/interfaces/city';
+import { Country } from 'src/app/interfaces/country';
 import { User } from 'src/app/interfaces/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
@@ -14,12 +16,16 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterFormComponent implements OnInit {
 
   // @Output() userRegistered = new EventEmitter<User>();
+ 
 
   bUsers: User[];
   user: User;
   date: string;
   passToConfirm: string;
   isBusiness: boolean;
+
+  countries: Country[];
+  countrySelected: Country;
 
   constructor(private authService: AuthService, private userSv: UserService) {
 
@@ -40,6 +46,69 @@ export class RegisterFormComponent implements OnInit {
       addressCity: "",
       addressCountry: ""
     }
+
+    this.countries = [
+      {
+        country: "Republica Dominicana",
+        cities: [
+          {
+            city: "Santo Domingo"
+          },
+          {
+            city: "Bonao"
+          },
+          {
+            city: "San Jose de Ocoa"
+          },
+          {
+            city: "Nagua"
+          },
+          {
+            city: "Bani"
+          }
+        ]
+      },
+      {
+        country: "Colombia",
+        cities: [
+          {
+            city: "Medellin"
+          },
+          {
+            city: "Bogota"
+          },
+          {
+            city: "Cali"
+          },
+          {
+            city: "Barranquilla"
+          },
+          {
+            city: "Cartajena"
+          }
+        ]
+      },
+      {
+        country: "Venezuela",
+        cities: [
+          {
+            city: "Caracas"
+          },
+          {
+            city: "Maracaibo"
+          },
+          {
+            city: "Maracay"
+          },
+          {
+            city: "Valencia"
+          },
+          {
+            city: "Merida"
+          }
+        ]
+      }
+    ]
   }
 
   ngOnInit(): void {

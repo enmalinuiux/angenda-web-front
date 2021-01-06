@@ -1,4 +1,4 @@
-export interface User {
+export interface Contact {
     id?: string;
     name: string;
     lastName: string;
@@ -10,4 +10,5 @@ export interface User {
     addressStreet: string;
     addressCity: string;
     addressCountry: string;
+    phones?: string[];
 }

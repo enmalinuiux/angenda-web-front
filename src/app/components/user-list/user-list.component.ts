@@ -48,7 +48,6 @@ export class UserListComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if(result.isConfirmed){
-        console.log(localStorage.getItem("token"))
         this.userSv.Delete(id).subscribe((data) => {
           Swal.fire({
             icon: "success",

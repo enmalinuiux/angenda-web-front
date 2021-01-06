@@ -45,15 +45,15 @@ export class UserService {
     );
   }
 
-  Put(user: User): Observable<User>{
-    return this.httpClient.put<User>(`${this.url}/${this.endpoint}/${user.id}`, user, { headers: this.HEADERS }).pipe(
+  Put(user: User){
+    return this.httpClient.put(`${this.url}/${this.endpoint}/${user.id}`, user, { headers: this.HEADERS }).pipe(
       retry(1),
       catchError(this.handleError)
     );
   }
 
-  Delete(id: string): Observable<User>{
-    return this.httpClient.delete<User>(`${this.url}/${this.endpoint}/${id}`, { headers: this.HEADERS }).pipe(
+  Delete(id: string) {
+    return this.httpClient.delete(`${this.url}/${this.endpoint}/${id}`, { headers: this.HEADERS }).pipe(
       retry(1),
       catchError(this.handleError)
     );
@@ -65,6 +65,6 @@ export class UserService {
       message: error.error.message
     }
     window.alert(this.errorResponse.message);
-    return throwError(this.errorResponse);
+    return throwError(error);
   }
 }
