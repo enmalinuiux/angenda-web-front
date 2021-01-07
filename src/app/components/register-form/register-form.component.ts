@@ -21,6 +21,7 @@ export class RegisterFormComponent implements OnInit {
   bUsers: User[];
   user: User;
   date: string;
+  pass: string;
   passToConfirm: string;
   isBusiness: boolean;
 
@@ -29,18 +30,19 @@ export class RegisterFormComponent implements OnInit {
 
   constructor(private authService: AuthService, private userSv: UserService) {
 
-    this.date = ""
-    this.passToConfirm = ""
+    this.date = "";
+    this.pass = ""
+    this.passToConfirm = "";
     this.isBusiness = false;
     this.bUsers = new Array<User>();
     
     this.user = {
       name: "",
       lastName: "",
-      pass: "",
       email: "",
+      pass: "",
       business: null,
-      birth: new Date("0000-00-00"),
+      birth: null,
       userType: 0,
       addressStreet: "",
       addressCity: "",
@@ -111,23 +113,7 @@ export class RegisterFormComponent implements OnInit {
     ]
   }
 
-  ngOnInit(): void {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
-
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
-          }
-
-          form.classList.add('was-validated')
-        }, false)
-      })
-      
+  ngOnInit(): void {      
     this.getUsersBusiness();
   }
 
@@ -159,9 +145,12 @@ export class RegisterFormComponent implements OnInit {
   // }
 
   SingUp(){
-    if(this.passToConfirm == this.user.pass){
+    if(this.passToConfirm == this.pass){
+      this.user.pass == this.pass;
+
       if(this.isBusiness)
         this.user.userType = 1;
+
       else{
         if(this.user.business != null)
           this.user.business = this.getBUserId(this.user.business);
@@ -173,10 +162,12 @@ export class RegisterFormComponent implements OnInit {
       
       this.authService.RegisterNewUser(this.user).subscribe((data) => {
         if(data != undefined){
+          
           let auth: Auth = {
             email: this.user.email,
-            pass: this.user.pass
+            pass: this.pass
           };
+
           this.authService.Authenticate(auth).subscribe((data) => {
             let authtResponse: AuthResponse = data;
             let token = authtResponse.token;
@@ -189,7 +180,9 @@ export class RegisterFormComponent implements OnInit {
             console.log(err);
           });
         }
+
       }, (err) => {
+        console.log(err);
         console.log("Este email ya fue registrado");
       });
     }
