@@ -2,6 +2,7 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { promise } from 'protractor';
 import { Auth } from 'src/app/interfaces/auth';
 import { AuthResponse } from 'src/app/interfaces/auth-response';
+import { BUser } from 'src/app/interfaces/b-user';
 import { City } from 'src/app/interfaces/city';
 import { Country } from 'src/app/interfaces/country';
 import { User } from 'src/app/interfaces/user';
@@ -15,18 +16,18 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterFormComponent implements OnInit {
 
-  // @Output() userRegistered = new EventEmitter<User>();
- 
+  // @Output() userRegistered = new EventEmitter<User>(); 
 
-  bUsers: User[];
+  bUsers: BUser[];
   user: User;
   date: string;
   pass: string;
   passToConfirm: string;
   isBusiness: boolean;
+  index: number;
 
   countries: Country[];
-  countrySelected: Country;
+  cities: City[] = [];
 
   constructor(private authService: AuthService, private userSv: UserService) {
 
@@ -34,7 +35,8 @@ export class RegisterFormComponent implements OnInit {
     this.pass = ""
     this.passToConfirm = "";
     this.isBusiness = false;
-    this.bUsers = new Array<User>();
+    this.bUsers = new Array<BUser>();
+    this.index = 0;
     
     this.user = {
       name: "",
@@ -118,7 +120,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   getUsersBusiness(){
-    this.userSv.GetBusinessUsers().subscribe((data)=>{
+    this.userSv.GetBUsers().subscribe((data)=>{
       this.bUsers = data;
     })
   }
@@ -126,6 +128,14 @@ export class RegisterFormComponent implements OnInit {
   getBUserId(name: string): string {
     let bU = this.bUsers.find(u => u.name == name);
     return bU.id;
+  }
+
+  getCountry(i: number) {
+    console.log(this.user.addressCountry);
+    this.index = i;
+    console.log(this.index);
+    this.cities = this.countries[this.index].cities;
+    //console.log(i);
   }
 
   // IsEmailTaked(email: string): boolean{

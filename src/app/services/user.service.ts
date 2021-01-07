@@ -5,6 +5,7 @@ import { User } from '../interfaces/user';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { ErrorResponse } from '../interfaces/error-response';
+import { BUser } from '../interfaces/b-user';
 
 @Injectable({
   providedIn: 'root'
@@ -31,8 +32,8 @@ export class UserService {
     );
   }
 
-  GetBusinessUsers(): Observable<User[]>{
-    return this.httpClient.get<User[]>(`${this.url}/${this.endpoint}/business-users`, { headers: this.HEADERS }).pipe(
+  GetBUsers(): Observable<BUser[]>{
+    return this.httpClient.get<BUser[]>(`${this.url}/${this.endpoint}/business-users`, { headers: this.HEADERS }).pipe(
       retry(1),
       catchError(this.handleError)
     );

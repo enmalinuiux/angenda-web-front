@@ -52,9 +52,9 @@
     </div>
     <div class="col-md-6 mb-3">
       <label for="UserAddressCountry" class="form-label">Address Country</label>
-      <select class="form-select" id="UserAddressCountry" [(ngModel)]="user.addressCountry" name="UserAddressCountry" required [ngModelOptions]="{standalone: true}">
+      <select class="form-select" id="UserAddressCountry" [(ngModel)]="user.addressCountry" (change)="getCountry($event.target.value)" name="UserAddressCountry" required [ngModelOptions]="{standalone: true}">
         <option selected disabled value="">Choose One...</option>
-        <option *ngFor="let country of countries;">
+        <option *ngFor="let country of countries; let i = index;" [value]="i">
           {{country.country}}
         </option>
       </select>
@@ -63,9 +63,10 @@
       <label for="UserAddressCity" class="form-label">Address City</label>
       <select class="form-select" id="UserAddressCity" [(ngModel)]="user.addressCity" name="UserAddressCity" required [ngModelOptions]="{standalone: true}">
         <option selected disabled value="">Choose One...</option>
-        <option *ngFor="let city of countries[0].cities">
+        <option *ngFor="let city of cities">
           {{city.city}}
         </option>
+
       </select>
     </div>
     <div class="col-12 mb-3">
