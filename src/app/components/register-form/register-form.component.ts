@@ -131,10 +131,10 @@ export class RegisterFormComponent implements OnInit {
   }
 
   getCountry(i: number) {
-    console.log(this.user.addressCountry);
-    this.index = i;
+    console.log("address country "+this.user.addressCountry);
     console.log(this.index);
     this.cities = this.countries[this.index].cities;
+    this.user.addressCountry = this.countries[this.index].country;
     //console.log(i);
   }
 
@@ -156,13 +156,13 @@ export class RegisterFormComponent implements OnInit {
 
   SingUp(){
     if(this.passToConfirm == this.pass){
-      this.user.pass == this.pass;
+      this.user.pass = this.pass;
 
       if(this.isBusiness)
         this.user.userType = 1;
 
       else{
-        if(this.user.business != null)
+        if(this.user.business != undefined || this.user.business != null)
           this.user.business = this.getBUserId(this.user.business);
       }
 
@@ -171,7 +171,7 @@ export class RegisterFormComponent implements OnInit {
       console.log(this.user.business);
       
       this.authService.RegisterNewUser(this.user).subscribe((data) => {
-        if(data != undefined){
+        if(data != undefined || data != null){
           
           let auth: Auth = {
             email: this.user.email,
@@ -192,7 +192,6 @@ export class RegisterFormComponent implements OnInit {
         }
 
       }, (err) => {
-        console.log(err);
         console.log("Este email ya fue registrado");
       });
     }

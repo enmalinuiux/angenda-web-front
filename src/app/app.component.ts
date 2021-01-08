@@ -4,6 +4,7 @@ import { ContactService } from './services/contact.service';
 import jwt_decode from 'jwt-decode';
 import { Contact } from './interfaces/contact';
 import { UserService } from './services/user.service';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
   tokenInfo: any;
   token: any;
 
-  constructor(private contactSv: ContactService, private userSv: UserService){
+  constructor(private contactSv: ContactService, private userSv: UserService, private authSv: AuthService){
     this.token = localStorage.getItem("token");
     this.tokenInfo = this.getDecodedAccessToken(this.token); // decode token
     //console.log(this.tokenInfo); // show decoded token object in console
@@ -41,5 +42,9 @@ export class AppComponent implements OnInit {
     catch(Error){
         return null;
     }
+  }
+
+  SignOut(){
+    this.authSv.LogOut();
   }
 }

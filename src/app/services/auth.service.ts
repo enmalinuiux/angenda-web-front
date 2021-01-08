@@ -29,4 +29,8 @@ export class AuthService {
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
     return this.httpClient.post<User>(`${this.url}/${this.endpoint}`, user, { headers: HEADERS });
   }
+
+  LogOut(){
+    localStorage.clear();
+  }
 }
