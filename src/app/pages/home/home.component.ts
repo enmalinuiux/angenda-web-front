@@ -5,6 +5,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { ContactService } from 'src/app/services/contact.service';
 import { UserService } from 'src/app/services/user.service';
 import jwt_decode from 'jwt-decode';
+import { Router } from '@angular/router';
 
 @Component({
   templateUrl: './home.component.html',
@@ -16,7 +17,7 @@ export class HomeComponent implements OnInit {
   tokenInfo: any;
   token: any;
 
-  constructor(private userSv: UserService, private authSv: AuthService){
+  constructor(private userSv: UserService, private authSv: AuthService, public router: Router){
     this.token = localStorage.getItem("token");
     this.tokenInfo = this.getDecodedAccessToken(this.token); // decode token
     console.log(this.tokenInfo); // show decoded token object in console
@@ -41,6 +42,8 @@ export class HomeComponent implements OnInit {
   
   SignOut(){
     this.authSv.LogOut();
+    if (localStorage.getItem("token") == null || localStorage.getItem("token") == undefined)
+      this.router.navigate(['signin']);
   }
 
 }

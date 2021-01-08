@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Auth } from 'src/app/interfaces/auth';
 import { AuthResponse } from 'src/app/interfaces/auth-response';
@@ -15,7 +16,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   authtResponse: AuthResponse;
   subscription: Subscription;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService, public router: Router) {
 
     this.auth = {
       email: "",
@@ -41,6 +42,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
         if (token){
           localStorage.setItem("token", token);
+          this.router.navigate(['/']);
         }
       }, (err) => {
         console.log("Usuario o contraseña no validos!");

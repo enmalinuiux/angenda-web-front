@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { promise } from 'protractor';
 import { Auth } from 'src/app/interfaces/auth';
 import { AuthResponse } from 'src/app/interfaces/auth-response';
@@ -29,7 +30,7 @@ export class RegisterFormComponent implements OnInit {
   countries: Country[];
   cities: City[] = [];
 
-  constructor(private authService: AuthService, private userSv: UserService) {
+  constructor(private authService: AuthService, private userSv: UserService, public router: Router) {
 
     this.date = "";
     this.pass = ""
@@ -185,6 +186,7 @@ export class RegisterFormComponent implements OnInit {
             if (token){
               console.log(token)
               localStorage.setItem("token", token);
+              this.router.navigate(['/']);
             }
           }, (err) => {
             console.log(err);
