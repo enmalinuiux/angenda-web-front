@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SigninComponent implements OnInit {
 
+  title = "Sign In"
+
   constructor() { }
 
   ngOnInit(): void {

@@ -17,8 +17,6 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class RegisterFormComponent implements OnInit {
 
-  // @Output() userRegistered = new EventEmitter<User>(); 
-
   bUsers: BUser[];
   user: User;
   date: string;
@@ -131,12 +129,9 @@ export class RegisterFormComponent implements OnInit {
     return bU.id;
   }
 
-  getCountry(i: number) {
-    console.log("address country "+this.user.addressCountry);
-    console.log(this.index);
+  getCountry() {
     this.cities = this.countries[this.index].cities;
     this.user.addressCountry = this.countries[this.index].country;
-    //console.log(i);
   }
 
   // IsEmailTaked(email: string): boolean{
@@ -168,8 +163,6 @@ export class RegisterFormComponent implements OnInit {
       }
 
       this.user.birth = new Date(this.date);
-
-      console.log(this.user.business);
       
       this.authService.RegisterNewUser(this.user).subscribe((data) => {
         if(data != undefined || data != null){
@@ -192,7 +185,6 @@ export class RegisterFormComponent implements OnInit {
             console.log(err);
           });
         }
-
       }, (err) => {
         console.log("Este email ya fue registrado");
       });

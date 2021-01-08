@@ -1,12 +1,13 @@
-<form class="row needs-validation" novalidate>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="form-check form-switch">
-          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [(ngModel)]="isBusiness" [ngModelOptions]="{standalone: true}">
-          <label class="form-check-label" for="flexSwitchCheckDefault">Is a Business?</label>
-        </div>
-      </div>
+<div class="row">
+  <div class="mb-2">
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" [(ngModel)]="isBusiness" [ngModelOptions]="{standalone: true}">
+      <label class="form-check-label" for="flexSwitchCheckDefault">Is a Business?</label>
     </div>
+  </div>
+</div>
+<div class="card p-4 shadow border-0 bg-light">
+  <form class="row needs-validation" novalidate>    
     <div class="mb-3" [ngClass]="{'col-md-6': !isBusiness, 'col-md-12': isBusiness}">
         <label for="UserName" class="form-label">First name</label>
         <input type="text" class="form-control" id="UserName" [(ngModel)]="user.name" name="UserName" required [ngModelOptions]="{standalone: true}">
@@ -33,10 +34,11 @@
       <label for="ConfirmPass" class="form-label">Confirm Password</label>
       <input type="password" class="form-control" id="ConfirmPass" [(ngModel)]="passToConfirm" name="ConfirmPass" required [ngModelOptions]="{standalone: true}">
     </div>
-    <div class="mb-3" [ngClass]="{'col-md-6': !isBusiness, 'col-md-12': isBusiness}">
+    <!-- <div class="mb-3" [ngClass]="{'col-md-6': !isBusiness, 'col-md-12': isBusiness}">
       <label for="UserBirth" class="form-label">Birthday</label>
       <input type="text" class="form-control date" id="UserBirth" [(ngModel)]="date" name="UserBirth" required [ngModelOptions]="{standalone: true}">
     </div>
+
     <div class="col-md-6 mb-3" *ngIf="!isBusiness">
       <label for="UserBusiness" class="form-label">Where you Work?</label>
       <select class="form-select" id="UserBusiness" [(ngModel)]="user.business" name="UserBusiness" required [ngModelOptions]="{standalone: true}">
@@ -50,15 +52,17 @@
       <label for="validationCustom03" class="form-label">Address Street</label>
       <input type="text" class="form-control" id="validationCustom03" [(ngModel)]="user.addressStreet" required [ngModelOptions]="{standalone: true}">
     </div>
+
     <div class="col-md-6 mb-3">
       <label for="UserAddressCountry" class="form-label">Address Country</label>
-      <select class="form-select" id="UserAddressCountry" [(ngModel)]="index" (change)="getCountry($event.target.value)" name="UserAddressCountry" required [ngModelOptions]="{standalone: true}">
+      <select class="form-select" id="UserAddressCountry" [(ngModel)]="index" (change)="getCountry()" name="UserAddressCountry" required [ngModelOptions]="{standalone: true}">
         <option selected disabled value="">Choose One...</option>
         <option *ngFor="let country of countries; let i = index;" [value]="i">
           {{country.country}}
         </option>
       </select>
     </div>
+
     <div class="col-md-6 mb-3">
       <label for="UserAddressCity" class="form-label">Address City</label>
       <select class="form-select" id="UserAddressCity" [(ngModel)]="user.addressCity" name="UserAddressCity" required [ngModelOptions]="{standalone: true}">
@@ -66,9 +70,9 @@
         <option *ngFor="let city of cities">
           {{city.city}}
         </option>
-
       </select>
-    </div>
+    </div> -->
+
     <div class="col-12 mb-3">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
@@ -79,8 +83,6 @@
     </div>
     <div class="col-12 mb-3">
       <a class="btn btn-primary" (click)="SingUp()">Sing Up</a>
-      
     </div>
   </form>
-  <a class="btn btn-outline-primary" routerLink="/signin">Back</a>
-
+</div>

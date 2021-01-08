@@ -1,4 +1,5 @@
-<form>
+<div class="card p-4 w-100 mx-auto shadow border-0 bg-light">
+  <form class="row">
     <div class="mb-3">
       <label for="exampleInputEmail1" class="form-label">Email address</label>
       <input type="email" [(ngModel)]="auth.email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" [ngModelOptions]="{standalone: true}">
@@ -12,6 +13,9 @@
       <input type="checkbox" class="form-check-input" id="exampleCheck1">
       <label class="form-check-label" for="exampleCheck1">Check me out</label>
     </div>
-    <a class="btn btn-primary" (click)="SingIn()">Sing In</a>
-    <a class="btn btn-primary" routerLink="/signup">Register</a>
+    <div class="d-grid gap-2">
+      <a class="btn btn-primary mb-2" (click)="SingIn()">Sing In</a>
+      <a class="btn btn-outline-primary" routerLink="/signup">Sign Up</a>
+    </div>    
   </form>
+</div>
