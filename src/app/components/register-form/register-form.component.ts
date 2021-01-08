@@ -36,7 +36,7 @@ export class RegisterFormComponent implements OnInit {
     this.passToConfirm = "";
     this.isBusiness = false;
     this.bUsers = new Array<BUser>();
-    this.index = 0;
+    this.index = null;
     
     this.user = {
       name: "",

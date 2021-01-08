@@ -40,6 +40,7 @@
           <td>Apellido</td>
           <td>Email</td>
           <td>Empresa</td>
+          <td>Telefono</td>
           <td colspan="2">Cumpleaños</td>
         </tr>
       </thead>
@@ -49,6 +50,7 @@
           <td>{{contact.lastName}}</td>
           <td>{{contact.email}}</td>
           <td>{{contact.business}}</td>
+          <td>{{contact.phones[0]}}</td>
           <td>{{contact.birth | date}}</td>
           <td><button class="btn btn-danger">x</button></td>
         </tr>
