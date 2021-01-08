@@ -10,11 +10,10 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login-form.component.html',
   styleUrls: ['./login-form.component.scss']
 })
-export class LoginFormComponent implements OnInit, OnDestroy {
+export class LoginFormComponent implements OnInit {
 
   auth: Auth;
   authtResponse: AuthResponse;
-  subscription: Subscription;
 
   constructor(private authService: AuthService, public router: Router) {
 
@@ -27,16 +26,13 @@ export class LoginFormComponent implements OnInit, OnDestroy {
       token: ""
     };
    }
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
-  }
 
   ngOnInit(): void {
   }
 
   SingIn(){
     if(this.auth.email != "" && this.auth.pass != ""){
-      this.subscription = this.authService.Authenticate(this.auth).subscribe((data) => {
+      this.authService.Authenticate(this.auth).subscribe((data) => {
         this.authtResponse = data;
         let token = this.authtResponse.token;
 

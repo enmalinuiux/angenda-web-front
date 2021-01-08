@@ -4,9 +4,10 @@ import { Error404Component } from './pages/error404/error404.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
+import { AuthGuardService } from './services/guards/auth-guard.service';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
   {path: 'signin', component: SigninComponent},
   {path: 'signup', component: SignupComponent},
   {path: '**', component: Error404Component},

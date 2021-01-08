@@ -17,6 +17,7 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
 // import { HttpconfigInterceptor } from "./interceptors/httpconfig.interceptor";
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { ContactListComponent } from './components/contact-list/contact-list.com
     //   useClass: HttpconfigInterceptor,
     //   multi: true
     // }
+    //{ provide: LocationStrategy, useClass: HashLocationStrategy }
   ],
   bootstrap: [AppComponent]
 })
