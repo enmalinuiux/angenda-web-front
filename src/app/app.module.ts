@@ -9,6 +9,13 @@ import { LoginFormComponent } from './components/login-form/login-form.component
 import { FormsModule } from '@angular/forms';
 import { RegisterFormComponent } from './components/register-form/register-form.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { HomeComponent } from './pages/home/home.component';
+import { Error404Component } from './pages/error404/error404.component';
+import { SigninComponent } from './pages/signin/signin.component';
+import { SignupComponent } from './pages/signup/signup.component';
+import { ToolbarComponent } from './components/toolbar/toolbar.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ContactListComponent } from './components/contact-list/contact-list.component';
 // import { HttpconfigInterceptor } from "./interceptors/httpconfig.interceptor";
 
 
@@ -17,7 +24,14 @@ import { UserListComponent } from './components/user-list/user-list.component';
     AppComponent,
     LoginFormComponent,
     RegisterFormComponent,
-    UserListComponent
+    UserListComponent,
+    HomeComponent,
+    Error404Component,
+    SigninComponent,
+    SignupComponent,
+    ToolbarComponent,
+    SidebarComponent,
+    ContactListComponent
   ],
   imports: [
     BrowserModule,

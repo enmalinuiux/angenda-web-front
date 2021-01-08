@@ -1,0 +1,14 @@
+<div *ngIf="user" class="card w-25">
+    <div class="row">
+      <div class="col-6">
+        <h1 >Hola {{user.name}}</h1> 
+      </div>
+      <div class="col-6">
+        <button class="btn btn-warning btn-block" (click)="SignOut()">LogOut to {{user.name}}</button>
+      </div>
+    </div>  
+  </div>
+<h1>{{title}}</h1>
+<hr>
+<app-user-list></app-user-list>
+<app-contact-list></app-contact-list>

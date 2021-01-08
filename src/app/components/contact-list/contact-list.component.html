@@ -1,0 +1,26 @@
+<table class="table table-bordered">
+    <thead class="text-white">
+      <tr class="bg-dark">
+        <td class="text-center" colspan="6">Contactos</td>
+      </tr>
+      <tr class="bg-secondary">
+        <td>Nombre</td>
+        <td>Apellido</td>
+        <td>Email</td>
+        <td>Empresa</td>
+        <td>Telefono</td>
+        <td colspan="2">Cumpleaños</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contact of contacts">
+        <td>{{contact.name}}</td>
+        <td>{{contact.lastName}}</td>
+        <td>{{contact.email}}</td>
+        <td>{{contact.business}}</td>
+        <td>{{contact.phones[0]}}</td>
+        <td>{{contact.birth | date}}</td>
+        <td><button class="btn btn-danger">x</button></td>
+      </tr>
+    </tbody>
+  </table>
