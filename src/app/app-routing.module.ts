@@ -1,16 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
+import { ContactDataComponent } from './pages/contact-data/contact-data.component';
 import { Error404Component } from './pages/error404/error404.component';
 import { HomeComponent } from './pages/home/home.component';
 import { SigninComponent } from './pages/signin/signin.component';
 import { SignupComponent } from './pages/signup/signup.component';
-import { AuthGuardService } from './services/guards/auth-guard.service';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent, canActivate: [AuthGuardService]},
-  {path: 'signin', component: SigninComponent},
-  {path: 'signup', component: SignupComponent},
-  {path: '**', component: Error404Component},
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'contact/:id', component: ContactDataComponent, canActivate: [AuthGuard] },
+  { path: 'signin', component: SigninComponent },
+  { path: 'signup', component: SignupComponent },
+  { path: 'auth', loadChildren: () => import('./plugins/auth/auth.module').then(m => m.AuthModule) },
+  { path: '**', component: Error404Component },
 ];
 
 @NgModule({

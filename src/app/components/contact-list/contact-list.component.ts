@@ -16,7 +16,7 @@ export class ContactListComponent implements OnInit {
   constructor(private contactSv: ContactService) { 
     this.token = localStorage.getItem("token");
     this.tokenInfo = this.getDecodedAccessToken(this.token); // decode token
-    console.log(this.tokenInfo); // show decoded token object in console
+    this.contacts = [];
   }
 
   ngOnInit(): void {

@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 col-md-2">
+        </div>
+        <div class="col-sm-4 col-md-4">
+            <blockquote>
+                <p>{{contact.name}} {{contact.lastName}}</p> <small><cite title="Source Title">{{contact.addressCity}}, {{contact.addressCountry}} <i class="glyphicon glyphicon-map-marker"></i></cite></small>
+            </blockquote>
+            <ul>
+                <li>{{contact.email}}</li>
+                <li>{{contact.birth | date}}</li>
+            </ul>            
+        </div>
+    </div>
+</div>

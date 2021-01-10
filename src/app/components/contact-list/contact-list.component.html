@@ -1,26 +1,19 @@
-<table class="table table-bordered">
-    <thead class="text-white">
-      <tr class="bg-dark">
-        <td class="text-center" colspan="6">Contactos</td>
-      </tr>
-      <tr class="bg-secondary">
-        <td>Nombre</td>
-        <td>Apellido</td>
-        <td>Email</td>
-        <td>Empresa</td>
-        <td>Telefono</td>
-        <td colspan="2">Cumpleaños</td>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let contact of contacts">
-        <td>{{contact.name}}</td>
-        <td>{{contact.lastName}}</td>
-        <td>{{contact.email}}</td>
-        <td>{{contact.business}}</td>
-        <td>{{contact.phones[0]}}</td>
-        <td>{{contact.birth | date}}</td>
-        <td><button class="btn btn-danger">x</button></td>
-      </tr>
-    </tbody>
-  </table>
+<ng-container *ngIf="contacts.length != 0; else elseTemplate">
+  <div class="list-group mb-3"  *ngFor="let contact of contacts">
+    <a [routerLink]="['/contact', contact.id]"
+    routerLinkActive="router-link-active" class="list-group-item list-group-item-action bg-primary text-white" aria-current="true">
+      <div class="d-flex w-100 justify-content-between">
+        <h6 class="mb-1">{{contact.name}} {{contact.lastName}}</h6>
+        <small>Birthday {{contact.birth | date}}</small>
+      </div>
+      <div class="d-flex w-100 justify-content-between">
+        <small>{{contact.email}}</small>
+        <small>{{contact.business}}</small>
+        <small>{{contact.phones}}</small>
+      </div>    
+    </a>
+  </div>
+</ng-container>
+<ng-template #elseTemplate>
+  <h1>No tines contactos</h1>
+</ng-template>

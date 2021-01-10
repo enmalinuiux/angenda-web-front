@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { FormsModule } from '@angular/forms';
@@ -16,9 +16,7 @@ import { SignupComponent } from './pages/signup/signup.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { ContactListComponent } from './components/contact-list/contact-list.component';
-// import { HttpconfigInterceptor } from "./interceptors/httpconfig.interceptor";
-import { HashLocationStrategy, LocationStrategy } from '@angular/common';
-
+import { ContactDataComponent } from './pages/contact-data/contact-data.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +30,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     SignupComponent,
     ToolbarComponent,
     SidebarComponent,
-    ContactListComponent
+    ContactListComponent,
+    ContactDataComponent
   ],
   imports: [
     BrowserModule,
@@ -41,14 +40,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     NgbModule,
     FormsModule
   ],
-  providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: HttpconfigInterceptor,
-    //   multi: true
-    // }
-    //{ provide: LocationStrategy, useClass: HashLocationStrategy }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
