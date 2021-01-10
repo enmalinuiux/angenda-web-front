@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/interfaces/contact';
-import { ContactService } from 'src/app/services/contact.service';
+import { ContactService } from 'src/app/services/contact/contact.service';
 import jwt_decode from 'jwt-decode';
 
 @Component({

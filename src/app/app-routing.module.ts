@@ -12,7 +12,6 @@ const routes: Routes = [
   { path: 'contact/:id', component: ContactDataComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'auth', loadChildren: () => import('./plugins/auth/auth.module').then(m => m.AuthModule) },
   { path: '**', component: Error404Component },
 ];
 

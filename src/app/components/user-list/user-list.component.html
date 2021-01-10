@@ -18,7 +18,10 @@
         <td>{{user.email}}</td>
         <td>{{user.business}}</td>
         <td>{{user.birth | date}}</td>
-        <td><button class="btn btn-danger" (click)="Delete(user.id)">D</button></td>
+        <td>
+          <button class="btn btn-danger" (click)="Delete(user.id)">D</button>
+          <button class="btn btn-primary" (click)="addAsContact(user)">+</button>
+        </td>
       </tr>
     </tbody>
   </table>

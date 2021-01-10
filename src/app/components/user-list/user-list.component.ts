@@ -1,7 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { User } from 'src/app/interfaces/user';
-import { UserService } from 'src/app/services/user.service';
+import { UserService } from 'src/app/services/user/user.service';
+import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { Contact } from 'src/app/interfaces/contact';
+import { ContactService } from 'src/app/services/contact/contact.service';
+import { UserContact } from 'src/app/interfaces/user-contact';
 
 @Component({
   selector: 'app-user-list',
@@ -12,11 +16,16 @@ export class UserListComponent implements OnInit {
 
   // @Input() users: User[];
 
+  token: any;
+  tokenInfo: any;
   users: User[];
+  contact: UserContact;
 
-  constructor(private userSv: UserService) { }
+  constructor(private userSv: UserService, private contactSv: ContactService) { }
 
   ngOnInit(): void { 
+    this.token = localStorage.getItem("token");
+    this.tokenInfo = this.getDecodedAccessToken(this.token); // decode token
     this.GetUsers();
   }
 
@@ -32,6 +41,20 @@ export class UserListComponent implements OnInit {
       });
     }, (err) => {
       console.log(err);
+    });
+  }
+
+  addAsContact(contact: User){
+    this.contact = {
+      contactId: contact.id,
+      userId: this.tokenInfo.id,
+      scheduledDate: new Date(),
+      nickName: "",
+      isBlocked: 0,
+    }
+
+    this.contactSv.Create(this.contact).subscribe((data) => {
+      console.log(data);
     });
   }
 
@@ -61,4 +84,12 @@ export class UserListComponent implements OnInit {
     });
   }
 
+  getDecodedAccessToken(token: string): any {
+    try{
+        return jwt_decode(token);
+    }
+    catch(Error){
+        return null;
+    }
+  }
 }

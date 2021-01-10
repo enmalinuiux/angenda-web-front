@@ -7,8 +7,8 @@ import { BUser } from 'src/app/interfaces/b-user';
 import { City } from 'src/app/interfaces/city';
 import { Country } from 'src/app/interfaces/country';
 import { User } from 'src/app/interfaces/user';
-import { AuthService } from 'src/app/services/auth.service';
-import { UserService } from 'src/app/services/user.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-register-form',

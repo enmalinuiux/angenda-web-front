@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { environment } from '../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { Auth } from '../interfaces/auth';
-import { AuthResponse } from '../interfaces/auth-response';
-import { User } from '../interfaces/user';
+import { Auth } from '../../interfaces/auth';
+import { AuthResponse } from '../../interfaces/auth-response';
+import { User } from '../../interfaces/user';
 import { catchError, retry } from 'rxjs/operators';
 
 @Injectable({
@@ -16,18 +16,18 @@ export class AuthService {
   url: string;
 
   constructor(private httpClient: HttpClient) {
-    this.endpoint = "user";
+    this.endpoint = "auth";
     this.url = environment.API_URL;
   }
 
   Authenticate(auth: Auth): Observable<AuthResponse>{
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.post<AuthResponse>(`${this.url}/${this.endpoint}/authenticate`, auth, { headers: HEADERS })
+    return this.httpClient.post<AuthResponse>(`${this.url}/${this.endpoint}/signin`, auth, { headers: HEADERS })
   }
 
   RegisterNewUser(user: User): Observable<User>{
     const HEADERS = new HttpHeaders({'Content-Type': 'application/json'});
-    return this.httpClient.post<User>(`${this.url}/${this.endpoint}`, user, { headers: HEADERS });
+    return this.httpClient.post<User>(`${this.url}/${this.endpoint}/signup`, user, { headers: HEADERS });
   }
 
   LogOut(){
