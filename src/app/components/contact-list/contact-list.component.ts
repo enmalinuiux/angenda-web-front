@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Contact } from 'src/app/interfaces/contact';
 import { ContactService } from 'src/app/services/contact/contact.service';
 import jwt_decode from 'jwt-decode';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-contact-list',
@@ -25,6 +26,29 @@ export class ContactListComponent implements OnInit {
         this.contacts = data;
       });
     }
+  }
+
+  Delete(contactId: string){
+    Swal.fire({
+      icon: "warning",
+      title: "Estas seguro?!",
+      text: "Se elimira para siempre!",
+      showCancelButton: true,
+      confirmButtonText: 'Si, borralo',
+      cancelButtonText: 'No',
+      reverseButtons: true
+    }).then((result) => {
+      if(result.isConfirmed){
+        this.contactSv.Delete(contactId, this.tokenInfo.id).subscribe((data) => {
+          Swal.fire({
+            icon: "success",
+            title: "Borrado!",
+          });
+        }, (err) => {
+          console.log(err);
+        });
+      }
+    });
   }
 
   getDecodedAccessToken(token: string): any {

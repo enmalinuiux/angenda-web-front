@@ -1,17 +1,22 @@
 <ng-container *ngIf="contacts.length != 0; else elseTemplate">
-  <div class="list-group mb-3"  *ngFor="let contact of contacts">
-    <a [routerLink]="['/contact', contact.id]"
-    routerLinkActive="router-link-active" class="list-group-item list-group-item-action bg-primary text-white" aria-current="true">
-      <div class="d-flex w-100 justify-content-between">
-        <h6 class="mb-1">{{contact.name}} {{contact.lastName}}</h6>
-        <small>Birthday {{contact.birth | date}}</small>
-      </div>
-      <div class="d-flex w-100 justify-content-between">
-        <small>{{contact.email}}</small>
-        <small>{{contact.business}}</small>
-        <small>{{contact.phones}}</small>
-      </div>    
-    </a>
+  <div class="row mb-3 justify-content-center"  *ngFor="let contact of contacts">
+    <div class="col-md-11 col-10 list-group px-0 rounded-start rounded-0">
+      <a [routerLink]="['/contact', contact.id]"
+        routerLinkActive="router-link-active" class="list-group-item list-group-item-action bg-primary text-white border-0" aria-current="true">
+          <div class="d-flex w-100 justify-content-between">
+            <h6 class="mb-1">{{contact.name}} {{contact.lastName}}</h6>
+            <small>
+              {{contact.birth | date}}
+            </small>
+          </div>
+          <div class="d-flex w-100 justify-content-between">
+            <small>{{contact.email}}</small>
+          </div>    
+        </a>
+    </div>
+    <div class="col-md-1 col-2 bg-primary rounded-end border-0 pr-2 py-auto">
+      <button class="btn btn-danger rounded-bottom rounded-0 float-end" (click)="Delete(contact.id)">X</button>
+    </div>
   </div>
 </ng-container>
 <ng-template #elseTemplate>
