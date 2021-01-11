@@ -3,6 +3,7 @@ import { Contact } from 'src/app/interfaces/contact';
 import { ContactService } from 'src/app/services/contact/contact.service';
 import jwt_decode from 'jwt-decode';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-contact-list',
@@ -14,7 +15,7 @@ export class ContactListComponent implements OnInit {
   tokenInfo: any;
   token: any;
 
-  constructor(private contactSv: ContactService) { 
+  constructor(private contactSv: ContactService, private router: Router) { 
     this.token = localStorage.getItem("token");
     this.tokenInfo = this.getDecodedAccessToken(this.token); // decode token
     this.contacts = [];
@@ -26,6 +27,11 @@ export class ContactListComponent implements OnInit {
         this.contacts = data;
       });
     }
+  }
+
+  GoTo(id: string)
+  {
+    this.router.navigate([`/contact/${id}`]);
   }
 
   Delete(contactId: string){
